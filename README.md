@@ -115,3 +115,23 @@ AstroBot process the JSON and sends a POST request to Webex to deliver the respo
 The get_latest_message() function uses requests.get() to retrieve Webex messages
 Send_message() function uses request.get() to request weather information from OpenWeatherMap
 Send_message() function uses request.post() to send the response back to webex
+
+Security Considerations
+
+AstroBot uses a Webex token to authenticate requests to the webex messaging API and an OpenWeatherMap API key to access weather and geocoding services.
+
+get_webex_token() and get_api_key() functions allow private information to be entered whe nthe program start.
+
+API rate limiting
+AstroBot uses time.sleep(5) in its main loop to wait 5 seconds between checks for new Webex messages. This reduces unecessary API requests and helps avoid reaching API rate limit.
+
+Input validation
+AstroBot checks whether a message begins with / before treating it as a command
+
+![alt text](<Screenshot 2026-10-23 174251.png>)
+
+The /Weather command also checks whether the user has provided a city name. If the city is missing, AstroBot sends a usage message 
+
+![](<Screenshot 2026-10-23 174756.png>)
+
+This checks help prevent invalid commands from being processed and reduce unnecessary API requests
