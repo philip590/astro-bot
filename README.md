@@ -37,3 +37,14 @@ The latitude and longitude are taken from the iss_position
 
 The coordinates are passed to a reverse_geocode() function to identify a nearby place. If no nearby locations is found the bot displays "Over Ocean/No Nearby City"
 
+Geocoding API
+
+Provider used: OpenWeatherMap
+API Base URL: https//api.openweathermap.org
+Endpoint for geocoding: GET /geo/1.0/direct
+Endpoint for reverse geocoding GET /geo/1.0/reverse
+Authentication method: API key ising appid
+Required query parameters: q,lat,lon,limit,appid
+
+get_city_coordinates() function uses forward geocoding to convert a city name into coordinates for the weather API.
+reverse_geocode() function uses the ISS coordinates to find a nearby location
