@@ -87,10 +87,24 @@ Endpoint: GET /geo/1.0/reverse
 Authentication method: API key supplied 
 
 Required parameters:
-lat-latitude of the ISS
-lon-longitude of the ISS
+lat-latitude of the selected city
+lon-longitude of the selected city
 limit-Maximum number of locations returned
 appid-OpenWeatherMap API key
+units-Metric units
+
+Purpose of the extended feature:
+The /sky <city> command allows users to check cloud coverage before planning a stargazing session.
+When users enter /sky london, AstroBot first calls get_city_coordinates() to retrieve the city's latitude and longitude.
+The get_sky() function then sends an HTTP GET request to the OpenWeatherMap API using request.get()
+The API returns a JSON response containing cloud coverage under clouds.all, expressed as a percentage
+
+AstroBot processes this information and produces a recommendation:
+-0-20%: Clear skies
+-21-50%:Partly cloudy
+-51-100%:Cloudy
+
+The response is formatted into a readable message and sent to the webex space
 
 get_iss_location() function retrieves the ISS coordinates from the Open Notify API. These coordinates are then passed to reverse_geocode(), which sends a GET request to OpenWeatherMap.
 
@@ -192,10 +206,11 @@ The send_message() function delivers formatted weather, ISS coordinates and help
 
 Controller:
 Handles user commands and decides which functions to execute. 
-Main() function checks messages for commands such as /Weather, 
+Main() function checks messages for commands such as /Weather <city>, 
                                                     /iss, 
                                                     /help,
-                                                    /quit
+                                                    /quit,
+                                                    /sky <city>
 
 Example: When a user enters /waether London:
 -The main() function identifies the /weather command and extracts the city name
@@ -203,7 +218,7 @@ Example: When a user enters /waether London:
 -Send_message() function sends the formatted weather response to the user through webex 
 
 Effectiness of AstroBot
-AstroBot was designed to help users have access to weather information and allow them to track the International Space Station through webex. The bot contains 4 commands: /weather, /iss, /help and /quit
+AstroBot was designed to help users have access to weather information and allow them to track the International Space Station through webex. The bot contains 5 commands: /weather, /iss, /help, /sky and /quit
 
 The /weather command allows users to retrieve current weather conditions for a specific city, these include temperature,humidity, weather description and wind speed. 
 The /iss command provides the ISS's current latitude and longitude and the ability to identify a nearby geographical location
