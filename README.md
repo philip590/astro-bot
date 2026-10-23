@@ -78,3 +78,18 @@ The output is a timestamp that is converted to a date and time in the computers 
 
 time.localtime() function converts the unix timestamp into a local time structure
 time_strftime() function formats this into a readable date and time
+
+Extended Feature API
+
+API Provider:OpenWeatherMap
+API Base URL: https://api.openweathermap.org
+Endpoint: GET /geo/1.0/reverse
+Authentication method: API key supplied 
+
+Required parameters:
+lat-latitude of the ISS
+lon-longitude of the ISS
+limit-Maximum number of locations returned
+appid-OpenWeatherMap API key
+
+get_iss_location() function retrieves the ISS coordinates from the Open Notify API. These coordinates are then passed to reverse_geocode(), which sends a GET request to OpenWeatherMap.
