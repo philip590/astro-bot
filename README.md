@@ -154,3 +154,22 @@ Processing JSON responses
 APIs return data in JSON format, which AstroBot converts into python dictionaries and lists using response.json()
 Weather API returns temp,humidity,weather description, wind speed and formats them into a readable message
 ISS API retuerns latitude and longitude inside the iss_position object. AstroBot extracts these coordinates and uses them to identify the ISS location
+
+Security Considerations
+AstroBot checks the HTTP status codes to determine whether the API request is successful 
+If the Webex API returns status code 200, this would indicate that the request was successful
+
+If an API fails, the bot can return an error message instead of attempting to process an unsuccessful response 
+
+![alt text](<Screenshot 2026-10-23 180747.png>)
+![alt text](<Screenshot 2026-10-23 180756.png>)
+![alt text](<Screenshot 2026-10-23 180805.png>)
+
+Handling invalid or unexpected API responses
+AstroBot uses conditional checks when processing APIs responses. 
+An example, the geocoding functions check whether a location was returned before attempting to access its coordinates.
+This helps prevent errors when a user emters a city that cannot be found.
+
+Avoiding excessive API requests
+AstroBot uses a 5 second delay between Webex message checks reducing unnecessary requests.
+The bot also tracks last_message_id to avoid repeatedly processing the same message.
