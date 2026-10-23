@@ -11,6 +11,9 @@ Endpoint to send messages: POST /messages
 Required Headers: Authorisation: Bearer (Your Webex token) and Content-type:application/json
 Sample full GET request: GET https://webexapis.com/v1/rooms
 
+![](<Screenshot 2026-10-23 155059.png>)
+![alt text](<Screenshot 2026-10-23 155151.png>)
+
 get_rooms() function retrieves the available webex space
 get_latest_messages() checks for any new commands
 send_message() function sends responses back to the selected space
@@ -26,8 +29,11 @@ Sample response format (JSON):{"message":"success",
                                 "timestamp":1471273200
                                 "iss_position":{"latitude": "50.0258": "longitude": "-149.9405"}}
                             
+![alt text](image.png)
+
 get_iss_location() function sends a GET request using requests.get(url) to retrieve the ISS location
 The JSON response is processed using response.json()
 The latitude and longitude are taken from the iss_position
 
 The coordinates are passed to a reverse_geocode() function to identify a nearby place. If no nearby locations is found the bot displays "Over Ocean/No Nearby City"
+
