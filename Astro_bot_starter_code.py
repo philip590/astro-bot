@@ -56,9 +56,9 @@ def select_room(rooms):
         name = input("Enter the room name: ")
         for room in rooms:
             if name.lower() in room["title"].lower():
-                print(#complete the print statement to confirm the selected room)
+                print(f"Selected Room: {room['title']}")
                 return room["id"]
-        print(#complete the print statement to indicate that the room was not found)
+        print("Room not found. Please try again.")
 
 
 def get_latest_message(token, room_id):
