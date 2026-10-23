@@ -229,10 +229,10 @@ def main():
                     city = parts[1]
                     send_message(token, room_id, get_weather(city, weather_key))
 
-            elif message_text.lower() == "#complete":
+            elif message_text.lower() == "/iss":
                 send_message(token, room_id, get_iss_location(weather_key))
 
-            elif message_text.lower() == "#complete":
+            elif message_text.lower() == "/quit":
                 send_message(token, room_id, "AstroBot shutting down.")
                 break
 
