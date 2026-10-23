@@ -135,3 +135,22 @@ The /Weather command also checks whether the user has provided a city name. If t
 ![](<Screenshot 2026-10-23 174756.png>)
 
 This checks help prevent invalid commands from being processed and reduce unnecessary API requests
+
+RESTful API usuage in AstroBot
+AstroBot uses RESTful APIs to communicate with Webex, OpenWeatherMap and Open Notify. These APIs allow the python application to request and exchange information over HTTP.
+
+HTTP GET requests
+AstroBot uses request.get() to retrieve information from external APIs.
+get_rooms() retrieves available Webex space
+get_latest_message() retrieves messages from a selected Webex space
+get_weather() retrieves current weather information from OpenWeatherMap
+get_iss_location() retrieves the ISS locations from the Open Notify
+get_city_coordinates() and reverse_geocode() retrieves geographical info from OpenWeatherMap
+
+HTTP POST requests
+send_message() function uses requests.post() to send messages to the webex messaging API
+
+Processing JSON responses
+APIs return data in JSON format, which AstroBot converts into python dictionaries and lists using response.json()
+Weather API returns temp,humidity,weather description, wind speed and formats them into a readable message
+ISS API retuerns latitude and longitude inside the iss_position object. AstroBot extracts these coordinates and uses them to identify the ISS location
