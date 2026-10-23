@@ -48,12 +48,12 @@ def get_rooms(token):
 
 def print_rooms(rooms):
     for room in rooms:
-        print(#complete the print statement to display the room title and id)
+        print(f"Room Title: {room['title']}, Room ID: {room['id']}")
 
 
 def select_room(rooms):
     while True:
-        name = input(#complete the input prompt to ask the user for the room name)
+        name = input("Enter the room name: ")
         for room in rooms:
             if name.lower() in room["title"].lower():
                 print(#complete the print statement to confirm the selected room)
