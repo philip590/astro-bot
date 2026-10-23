@@ -151,27 +151,29 @@ def reverse_geocode(lat, lon, api_key):
 
 
 def get_iss_location(api_key):
-    url = #complete the URL to fetch ISS current location from the Open Notify API
+    url = "http://api.open-notify.org/iss-now.json"
 
-    response = requests.#complete(#complete)
+    response = requests.get(url)
 
     if response.status_code != 200:
-        return #complete the return statement to indicate whether ISS location retrieved or not
+        return None
 
     data = response.json()
 
-    lat = data[#complete][#complete]
-    lon = data[#complete][#complete]
+    lat = data["iss_position"]["latitude"]
+    lon = data["iss_position"]["longitude"]
 
     location = reverse_geocode(lat, lon, api_key)
 
     place = "Over Ocean / No Nearby City"
 
     if location:
-        place = #
+        place = f"{location.get('name', 'Unknown City')}, {location.get('country', 'Unknown Country')}"
 
     return (
-        #complete the return statement to format and return the ISS location information including latitude, longitude, and place name
+        f"ISS Current Location:\n"
+        f"Latitude: {lat}, Longitude: {lon}\n"
+        f"Place: {place}"
     )
 
 # =========================
