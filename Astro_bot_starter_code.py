@@ -25,7 +25,11 @@ def get_webex_token():
         return "Bearer YOUR_WEBEX_TOKEN"
 
 def get_api_key(prompt, hardcoded_key):
-  #complete the function to get the API key from user input or use a hardcoded key
+    choice = input(f"Use saved {prompt}? (y/n): ").lower()
+    if choice == "n":
+        return input(f"Enter your {prompt}: ")
+    else:
+        return hardcoded_key
 
 # =========================
 # WEBEX FUNCTIONS
