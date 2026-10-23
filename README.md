@@ -201,3 +201,40 @@ Example: When a user enters /waether London:
 -The main() function identifies the /weather command and extracts the city name
 -The get_weather() function retrieves and process London's weather information from OpenWeatherMap
 -Send_message() function sends the formatted weather response to the user through webex 
+
+Effectiness of AstroBot
+AstroBot was designed to help users have access to weather information and allow them to track the International Space Station through webex. The bot contains 4 commands: /weather, /iss, /help and /quit
+
+The /weather command allows users to retrieve current weather conditions for a specific city, these include temperature,humidity, weather description and wind speed. 
+The /iss command provides the ISS's current latitude and longitude and the ability to identify a nearby geographical location
+
+Testing has proven that these commands have worked and returned information through webex. Overall Astrobot meets it main functionaily, altohugh it depeends on external APIs being available
+
+Successful Design
+One successful design was using a separate python functions for using different tasks. Such as get_weather() retrieves weather information, whilst send_messages() handles commmunication with webex. This makes the code easier to understand and fix issues quickly.
+
+Another effective decision was using RESTful APIs because they allow AstroBot to retrieve live information without maintaining its own weather or ISS database
+
+The 5 second delay between message checks also helps reduce unnecessary API requests
+
+Challenge Encountered
+One challenge was integrated multiple APIs because each service uses different endpoints, parameters and JSON response structures.
+
+The webex API requires a bearer token for authentication, whike OpenWeatherMap uses an API key supplied through the appid parameter
+
+Testing and debugging were important because errors in API requests or response processing could prevent commands from working correctly
+
+Security Risks
+A significant secuirty risk is exposing Webex tokens or OpenWeatherMap API keys. To reduce this risk, AstoBot allows the keys to be entered when the program starts instead of requiring real credentials to be stored in the source code.
+
+Another risk is excessive API requests. AstroBot uses time.sleep(5) to limit how frequently it checks for new messages
+
+Future Improvements
+AstroBot could be improved by adding automatic retries when there are API failures.
+
+Another improvement would be to seperate the program into modules for webex communication, weather information, ISS tracking and command processing. This would improve organisation and allow individual components to be tested independently.
+
+Limitations
+Although AstroBot successfully performs its main functions, its reliability depends on the availability of external API services.
+
+Another limitation is that AstroBot uses polling to retrieve messages from webex everu 5 seconds. While this is straight forward to implement, it creates repeated API requests even when no messages are available. A future improvement would be to use webex webhooks, which would notify the application when a new message arrives.
