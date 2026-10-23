@@ -151,7 +151,7 @@ def reverse_geocode(lat, lon, api_key):
 
 
 def get_iss_location(api_key):
-    url = "https://api.open-notify.org/iss-now.json"
+    url = "http://api.open-notify.org/iss-now.json"
 
     response = requests.get(url)
 
