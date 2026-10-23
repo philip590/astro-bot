@@ -151,7 +151,7 @@ def reverse_geocode(lat, lon, api_key):
 
 
 def get_iss_location(api_key):
-    url = "http://api.open-notify.org/iss-now.json"
+    url = "https://api.open-notify.org/iss-now.json"
 
     response = requests.get(url)
 
@@ -191,7 +191,7 @@ def main():
     rooms = get_rooms(token)
 
     if not rooms:
-        print(#complete the print statement )
+        print("No Webex rooms found. Check your access token and try again.")
         return
 
     print_rooms(rooms)
