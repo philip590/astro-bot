@@ -133,6 +133,43 @@ def get_weather(city, api_key):
         f"Humidity: {weather['main']['humidity']}%, "
         f"Wind Speed: {weather['wind']['speed']} m/s"
     )
+# SKY / STARGAZING FUNCTION
+def get_sky(city, api_key):
+    location = get_city_coordinates(city, api_key)
+
+    if not location:
+        return "City not found."
+
+    url = "https://api.openweathermap.org/data/2.5/weather"
+    params = {
+        "lat": location["lat"],
+        "lon": location["lon"],
+        "appid": api_key,
+        "units": "metric"
+    }
+
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()
+
+        data = response.json()
+        cloud_cover = data["clouds"]["all"]
+
+        if cloud_cover <=20:
+            condition = "Clear skies, great for stargazing"
+        elif cloud_cover <= 50:
+            condition = "Partly cloudy, some stars may be visible"
+        else:
+            condition = "Cloudy, stargazing may be difficult"
+
+        return(
+            f"Sky conditions in {city}:\n"
+            f"Cloud Cover: {cloud_cover}%\n"
+            f"{condition}"
+        )
+    except (requests.RequestException, KeyError, ValueError, TypeError) as e:
+        print(f"Sky API Error: {e}")
+        return "Unable to retrieve sky conditions right now."
 
 # =========================
 # ISS FUNCTIONS
@@ -216,7 +253,7 @@ def main():
                 send_message(
                     token,
                     room_id,
-                    "/weather <city>\n/iss\n/help\n/quit"
+                    "/weather <city>\n/sky <city>\n/iss\n/help\n/quit"
                 )
 
             elif message_text.lower().startswith("/weather"):
@@ -228,6 +265,14 @@ def main():
                 else:
                     city = parts[1]
                     send_message(token, room_id, get_weather(city, weather_key))
+
+            elif message_text.lower().startswith("/sky"):
+                parts = message_text.split(maxsplit=1)
+                if len(parts) < 2:
+                    send_message(token, room_id, "Usage: /sky <city>")
+                else:
+                    city = parts[1]
+                    send_message(token, room_id, get_sky(city, weather_key))
 
             elif message_text.lower() == "/iss":
                 send_message(token, room_id, get_iss_location(weather_key))
