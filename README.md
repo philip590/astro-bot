@@ -48,3 +48,25 @@ Required query parameters: q,lat,lon,limit,appid
 
 get_city_coordinates() function uses forward geocoding to convert a city name into coordinates for the weather API.
 reverse_geocode() function uses the ISS coordinates to find a nearby location
+
+Weather API
+
+API Provider:OpenWeatherMap
+API Base URL:https://api.open.weathermap.org
+Endpoint for current weather: GET /data/2.5/weather
+Authentication Method:API key passed through the appid
+
+QUery parameters:
+lat-Latittude of location
+lon-longitude of the location
+appid-OpenWeatherMap API key
+units=metric -Returns temperature in celsius
+
+When I type /weather London, the bot first uses get_city_coordinates() to find London's latitude and longitude
+get_weather() function then sends a GET request to OpenWeatherMap using requests.get()
+
+The API returns JSON containing the temp,weather description, humidity and wind speed. AstroBot formats this info and sends it to the webex space using send_message.
+
+![alt text](<Screenshot 2026-10-23 162034.png>)
+
+
