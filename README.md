@@ -93,3 +93,25 @@ limit-Maximum number of locations returned
 appid-OpenWeatherMap API key
 
 get_iss_location() function retrieves the ISS coordinates from the Open Notify API. These coordinates are then passed to reverse_geocode(), which sends a GET request to OpenWeatherMap.
+
+Web Architecture- Client- Server Model
+AstroBot uses a client-server communication with webex and retrieve information from external APIs
+
+Client: AstroBot uses a python application that acts as an HTTP client when requesting information from APIs. The user interacts with AstroBot through webex.
+
+Servers:
+Webex Messaging API: Recieves and delivers messages between users and Astrobot
+OpenWeatherMap API: Provides current weather information and geocoding services
+Open Notify API: Provides the current location of the internation space station
+
+The user enters a command such as /weather London into webex
+Astrobot sends a GET request to the webex messaging API to retrieve the message
+Astrobot process the command and sends GET requests to the appropriate external API
+The API returns information in JSON format
+AstroBot process the JSON and sends a POST request to Webex to deliver the response to the user
+
+![alt text](<Screenshot 2026-10-23 173327.png>)
+
+The get_latest_message() function uses requests.get() to retrieve Webex messages
+Send_message() function uses request.get() to request weather information from OpenWeatherMap
+Send_message() function uses request.post() to send the response back to webex
