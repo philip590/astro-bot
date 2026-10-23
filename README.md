@@ -173,3 +173,31 @@ This helps prevent errors when a user emters a city that cannot be found.
 Avoiding excessive API requests
 AstroBot uses a 5 second delay between Webex message checks reducing unnecessary requests.
 The bot also tracks last_message_id to avoid repeatedly processing the same message.
+
+MVC Design Pattern in AstroBot
+
+Model:
+Handles retrieving and processing data
+Functions such as
+                    get_weather(),
+                    get_iss_location(),
+                    get_city_coordinates(),
+                    reverse_geocoding()
+
+obtain information from external APIs and format the result
+
+View:
+Presents the information to the user through webex messages.
+The send_message() function delivers formatted weather, ISS coordinates and help messages to the selected webex space
+
+Controller:
+Handles user commands and decides which functions to execute. 
+Main() function checks messages for commands such as /Weather, 
+                                                    /iss, 
+                                                    /help,
+                                                    /quit
+
+Example: When a user enters /waether London:
+-The main() function identifies the /weather command and extracts the city name
+-The get_weather() function retrieves and process London's weather information from OpenWeatherMap
+-Send_message() function sends the formatted weather response to the user through webex 
