@@ -69,4 +69,12 @@ The API returns JSON containing the temp,weather description, humidity and wind 
 
 ![alt text](<Screenshot 2026-10-23 162034.png>)
 
+Epoch to Human Time Conversion
+Library Used:Python's built-in time module.
+Function used to convert epoch:
+time.strftime() with time.localtime()
 
+The output is a timestamp that is converted to a date and time in the computers local timezone.
+
+time.localtime() function converts the unix timestamp into a local time structure
+time_strftime() function formats this into a readable date and time
